@@ -1,9 +1,32 @@
-<h1>Food Pedia</h1>
+<!-- <h1>Food Pedia</h1>
 
-<h5>App: </h5>
+<h5></h5>
 <p>{{ app }}</p>
 <h5>Name: </h5>
 <p>{{ name }}</p>
 <h5>Class: </h5>
-<p>{{ class }}</p>
+<p>{{ class }}</p> -->
+
+<head>
+    <title>Food Pedia</title>
+</head>
+
+<body>
+    <h1>{{app}}</b></h1>
+    <p>Nama: {{ name }}</p>
+    <p>Kelas: {{ class }}</p>
+    <h2>Wondering What To Eat? We've Got You.</h2>
+    <h3>Available Items:</h3>
+    <ul>
+        {% for item in items %}
+        <li>
+            <h4>{{ item.name }}</h4>
+            <p>Price: Rp {{ item.price }}</p>
+            <p>Description: {{ item.description }}</p>
+            <p>Stock: {{ item.stock }}</p>
+            <p>Rating: {{ item.rating }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
 

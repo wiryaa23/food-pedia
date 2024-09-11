@@ -1,5 +1,6 @@
 from django.shortcuts import render
 
+# Add 'items'
 def show_main(request):
     context = {
         'app': 'Food Pedia',

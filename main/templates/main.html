@@ -1,3 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<title>Food Pedia</title>
+
+<h1>{{app}}</b></h1>
+<p>An App by {{ name }} from {{ class }}</p>
+
+<h2>Wondering What To Eat? We've Got You.</h2>
+<h3>Available Items:</h3>
+<ul>
+    {% for item in food_entries %}
+    <li>
+        <h4>{{ item.name }}</h4>
+        <p>Price: Rp {{ item.price }}</p>
+        <p>Description: {{ item.description }}</p>
+        <p>Rating: {{ item.rating }}</p>
+    </li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'main:create_food_entry' %}">
+  <button>Add New Food</button>
+</a>
+{% endblock content %}
+
+
 <!-- <h1>Food Pedia</h1>
 
 <h5></h5>
@@ -7,7 +33,8 @@
 <h5>Class: </h5>
 <p>{{ class }}</p> -->
 
-<head>
+
+<!-- <head>
     <title>Food Pedia</title>
 </head>
 
@@ -28,5 +55,4 @@
         </li>
         {% endfor %}
     </ul>
-</body>
-
+</body> -->

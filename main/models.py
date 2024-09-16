@@ -7,7 +7,8 @@ class FoodEntry(models.Model):
     name = models.CharField(max_length=255)
     price = models.IntegerField()
     description = models.TextField()
-    quantity = models.IntegerField()
+    quantity = models.IntegerField(
+        validators=[MinValueValidator(1)])
     rating = models.FloatField(
         validators=[MinValueValidator(0), MaxValueValidator(5)]
     )

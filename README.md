@@ -4,6 +4,8 @@
 **NPM**: 2306152115 <br />
 **Kelas**: PBP C
 
+**Link Web:** [http://wirya-dharma-foodpedia.pbp.cs.ui.ac.id/](http://wirya-dharma-foodpedia.pbp.cs.ui.ac.id/)
+
 # Jawaban Soal Tugas 2
 
 

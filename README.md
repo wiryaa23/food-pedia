@@ -1,14 +1,11 @@
-<!-- Nama : Wirya Dharma Kurnia
-NPM: 2306152115
-Kelas: PBP C -->
-
 # Food Pedia
-
-# Jawaban Soal Tugas 2
 
 **Nama**: Wirya Dharma Kurnia <br />
 **NPM**: 2306152115 <br />
 **Kelas**: PBP C
+
+# Jawaban Soal Tugas 2
+
 
 ## 1. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
 Cara yang saya lakukan dalam tugas kali ini adalah sebagai berikut.
@@ -31,7 +28,7 @@ Cara yang saya lakukan dalam tugas kali ini adalah sebagai berikut.
 - Melakukan push perubahan ke GitHub dan PWS.
 
 ## 2. Buatlah bagan yang berisi request client ke web aplikasi berbasis Django beserta responnya dan jelaskan pada bagan tersebut kaitan antara urls.py, views.py, models.py, dan berkas html.
-<img src="bagan_tugas2pbp.png">
+<img src="pictures/bagan_tugas2pbp.png">
 Request dari user akan diproses melalui Django Web Server ke urls.py terlebih dahulu. Kemudian, urls.py akan meneruskannya ke view yang sesuai. View lalu akan membaca/menulis data pada model, dan mengggunakan template untuk menunjkkan respon pada user. Berkas .html juga akan dirender sehingga views.py dapat mengembalikan respons yang diinginkan kembali kepada user.
 
 ## 3. Jelaskan fungsi git dalam pengembangan perangkat lunak!
@@ -47,3 +44,57 @@ Menurut saya, framework Django dijadikan permulaan pembelajaran pengembangan per
 
 ## 5. Mengapa model pada Django disebut sebagai ORM?
 Model pada Django disebut sebagai ORM (Object Relational Mapping) karena menyediakan suatu lapisan abstraksi untuk interaksi dengan basis data  menggunakan Python, tanpa harus menulis query SQL secara langsung. ORM akan memetakan objek ke tabel dalam kelas Python, sehingga dapat memudahkan developer dalam melakukan operasi basis data seperti menambah, mengubah, ataupun menghapus data.
+
+
+# Jawaban Soal Tugas 3
+
+
+## 1. Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform!
+Data delivery merupakan salah satu aspek terpenting dalam pengimplementasian sebuah platform. Alasannya adalah karena sebagai berikut.
+- Akses data secara real-time:  Dalam platform digital, seringkali developer maupun pengguna membutuhkan data secara real-time, baik untuk pengembangan aplikasi maupun untuk kebutuhan konsumen. Misalnya dalam aplikasi e-commerce, konsumen harus dapat melihat stok barang yang tersisa sebelum memesan barang tersebut.
+- Integrasi data antar komponen: Ada berbagai komponen dalam platform digital, di mana seluruh komponen tersebut memerlukan pertukaran data yang konsisten agar platform dapat berjalan dengan baik. Data delivery berperan untuk melakukan integrasi data secara efisien antar komponen-komponen tersebut sehingga pertukaran data dapat terjadi di lingkungan platform tersebut.
+- Optimisasi performa platform: Data delivery sebagai aspek terpenting tentunya akan sangat memengaruhi performa suatu platform. Mengoptimalisasi data delivery tentunya akan meningkatkan kinerja platform secara keseluruhan, khususnya jika skala platform sudah berkembang luas dan memiliki banyak pengguna.
+- Keamanan data: Dalam proses data delivery, seringkali data dilindungi dengan melibatkan protokol keamanan seperti enkripsi. Proses data delivery yang terstruktur tentunya akan mempermudah pengelolaan data secara aman, sehingga data yang bersifat rahasia dapat tetap terjaga kerahasiaan dan integritasnya.
+
+## 2. Menurutmu, mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
+Menurut saya pribadi, di era platform digital yang bersifat modern ini JSON cenderung lebih baik jika dibandingkan dengan XML. Alasan yang mendukung pendapat saya adalah sebagai berikut.
+- Kompleksitas yang rendah dan mudah dibaca: JSON memiliki struktur yang lebih sederhana dan ringkas dibandingkan XML. Hal ini dikarenakan JSON lebih berfokus pada pengiriman dan pertukaran data, sehingga lebih mudah digunakan untuk mengembangkan API, aplikasi, dan layanan web modern. JSON juga memiliki format penyajian data yang cenderung lebih mudah dibaca oleh manusia.
+- Ukuran data yang lebih kecil: Ukuran data JSON lebih kecil dibandingkan XML, karena JSON tidak menggunakan banyak markup seperti XML dalam membungkus data. Hal ini menyebabkan penyimpanan yang digunakan menjadi lebih sedikit sehingga program dapat berjalan dengan lebih cepat dan efisien.
+- Kecepatan pemrosesan data: Karena ukurannya lebih kecil, pemrosesan data dengan JSON juga mengalami peningkatan jika dibandingkan dengan XML. Karena itu, JSON lebih cocok digunakan untuk program yang membutuhkan respon yang cepat dengan pertukaran data yang sederhana.
+Karena alasan-alasan di atas, JSON lebih populer dibandingkan XML untuk kebanyakan aplikasi modern saat ini.
+
+## 3. Jelaskan fungsi dari method is_valid() pada form Django dan mengapa kita membutuhkan method tersebut?
+Method 'is_valid()' pada form Django berfungsi untuk melakukan validasi terhadap data yang masuk ke dalam form. Hal ini penting untuk memastikan semua data yang masuk ke dalam form telah memenuhi aturan validasi yang ditentukan. Alasan method ini penting dan dibutuhkan adalah sebagai berikut.
+- Validasi data: Ini merupakan tujuan utama dari method 'is_valid()', yaitu memastikan bahwa semua field data yang dibutuhkan telah terisi sesuai dengan tipe data yang diminta, dan memenuhi aturan validasi yang berlaku (seperti nilai minimum dari integer atau panjang minimum dari string).
+- Feedback kepada user: Django dapat memberikan pesan error tertentu kepada user jika data yang dimasukkan tidak sesuai. Hal ini memudahkan user untuk memperbaiki input yang dimasukkan.
+- Meningkatkan keamanan: Validasi data menyebabkan input yang diterima oleh program cenderung aman. Dalam beberapa kasus, ada kemungkinan input yang dimasukkan berbahaya dan dapat memicu serangan seperti injection. Hal ini dicegah dengan validasi data yang dilakukan method 'is_valid()'.
+
+## 4. Mengapa kita membutuhkan 'csrf_token' saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan 'csrf_token' pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
+'csrf_token' pada Django berfungsi sebagai salah satu mekanisme perlindungan untuk keamanan platform, khususnya dalam perlindungan serangan Cross-Site Request Forgery (CSRF). CSRF merupakan serangan di mana penyerang melakukan eksploitsi kredensial pengguna lain untuk membuat mereka mengirim request yang tidak sah ke situs web tertentu tanpa sepengetahuan atau izin pengguna tersebut. Dalam hal ini, 'csrf_token' berguna untuk memverifikasi request yang dikirim berasal dari pengguna yang sah.
+
+Jika kita tidak menambahkan 'csrf_token' pada form Django, aplikasi akan rentan terhadap serangan CSRF. Ini memberikan kesempatan kepada penyerang untuk melakukan aksi dengan memanfaatkan kredensial pengguna lain. Hal tersebut dimanfaatkan penyerang dengan cara sebagai berikut.
+- Penyerang bisa saja membuat request HTTP palsu dengan formulir HTML atau script JavaScript, yang secara otomatis mengirim reuqest yang tidak diinginkan.
+- Ketika pengguna yang sah mengunjungi halaman penyerang dalam sesi aplikasi yang sedang berlangsung, browser dapat menyertakan cookie sesi yang valid sehingga server akan menganggap request tersebut bersifat sah.
+- Jika hal ini terjadi, penyerang dapat memanfaatkannya untuk melakukan tindakan kriminal seperti pencurian data, transaksi yang tidak sah, dan masih banyak lagi.
+
+## 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+Cara yang saya lakukan dalam tugas kali ini adalah sebagai berikut.
+- Membuat direktori 'templates' pada root folder dan mengisinya dengan 'base.html', yang berfungsi sebagai template dasar/kerangka views dari web.
+- Menambahkan 'templates' yang telah dibuat pada 'settings.py'
+- Mengubah 'main.html' pada subdirektori 'main/templates' dengan menggunakan 'base.html' sebagai template utama.
+- Menghapus berkas 'db.sqlite3' untuk mengosongkan objek pada model. Kemudian melakukan 'import uuid' pada 'models.py' dan dilanjutkan dengan melakukan migrasi perubahan tersebut.
+- Membuat berkas 'forms.py' pada direktori 'main' dan mengisinya sesuai model yang telah dibuat sebelumnya. 
+- Menambahkan import redirect pada 'views.py' di direktori 'main', lalu membuat fungsi 'create_food_entry' yang menerima parameter request. Fungsi ini melakukan redirect ke fungsi 'show_main'.
+- Mengubah fungsi 'show_main' sesuai kebutuhan web. Dalam web saya, fungsi ini mengambil data entri makanan yang sudah default dan yang dari database, kemudian menampilkannya pada halaman web. Context pada fungsi ini akan berubah sehingga berupa gabungan entri default dan database.
+- Menambahkan import 'create_mood_entry' dan path fungsi ke berkas 'urls.py'.
+- Membuat berkas HTML baru dengan nama 'create_food_entry.html' pada direktori 'main/templates' dan mengubah isinya sesuai kebutuhan web Food Pedia. Berkas ini berfungsi untuk menandakan block dengan metode POST, meningkatkan security terhadap serangan CSRF, menampilkan fields 'forms.py' sebagai table, dan mengirim request ke view 'create_food_entry(request)' dengan tombol submit.
+- Mengedit 'main.html' untuk menambahkan tombol "Add New Food".
+- Pada berkas 'views.py', lakukan import 'HttpResponse', 'Serializer', dan membuat 4 fungsi baru untuk menampilkan data pada JSON dan XML. Fungsi tersebut adalah 'show_xml', 'show_json', 'show_xml_by_id', dan 'show_json_by_id'.
+- Menambahkan fungsi baru yaitu 'delete_item' yang menerima parameter request dan pk, yang berfungsi untuk menghapus data tertentu pada database. Path kelima fungsi baru ini juga ditambahkan pada bagian 'urlpatterns' di berkas 'urls.py'.
+- Melakukan push perubahan ke GitHub, yang secara otomatis akan meneruskannya ke PWS dengan GitHub actions.
+
+## Dokumentasi URL Postman
+'show_json': <img src="pictures/show_json.png">
+'show_xml': <img src="pictures/show_xml.png">
+'show_json_by_id': <img src="pictures/show_json_by_id.png">
+'show_xml_by_id': <img src="pictures/show_xml_by_id.png">

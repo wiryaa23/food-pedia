@@ -81,22 +81,23 @@ Jika kita tidak menambahkan 'csrf_token' pada form Django, aplikasi akan rentan 
 
 ## 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
 Cara yang saya lakukan dalam tugas kali ini adalah sebagai berikut.
-- Membuat direktori 'templates' pada root folder dan mengisinya dengan 'base.html', yang berfungsi sebagai template dasar/kerangka views dari web.
-- Menambahkan 'templates' yang telah dibuat pada 'settings.py'
-- Mengubah 'main.html' pada subdirektori 'main/templates' dengan menggunakan 'base.html' sebagai template utama.
-- Menghapus berkas 'db.sqlite3' untuk mengosongkan objek pada model. Kemudian melakukan 'import uuid' pada 'models.py' dan dilanjutkan dengan melakukan migrasi perubahan tersebut.
-- Membuat berkas 'forms.py' pada direktori 'main' dan mengisinya sesuai model yang telah dibuat sebelumnya. 
-- Menambahkan import redirect pada 'views.py' di direktori 'main', lalu membuat fungsi 'create_food_entry' yang menerima parameter request. Fungsi ini melakukan redirect ke fungsi 'show_main'.
-- Mengubah fungsi 'show_main' sesuai kebutuhan web. Dalam web saya, fungsi ini mengambil data entri makanan yang sudah default dan yang dari database, kemudian menampilkannya pada halaman web. Context pada fungsi ini akan berubah sehingga berupa gabungan entri default dan database.
-- Menambahkan import 'create_mood_entry' dan path fungsi ke berkas 'urls.py'.
-- Membuat berkas HTML baru dengan nama 'create_food_entry.html' pada direktori 'main/templates' dan mengubah isinya sesuai kebutuhan web Food Pedia. Berkas ini berfungsi untuk menandakan block dengan metode POST, meningkatkan security terhadap serangan CSRF, menampilkan fields 'forms.py' sebagai table, dan mengirim request ke view 'create_food_entry(request)' dengan tombol submit.
-- Mengedit 'main.html' untuk menambahkan tombol "Add New Food".
-- Pada berkas 'views.py', lakukan import 'HttpResponse', 'Serializer', dan membuat 4 fungsi baru untuk menampilkan data pada JSON dan XML. Fungsi tersebut adalah 'show_xml', 'show_json', 'show_xml_by_id', dan 'show_json_by_id'.
-- Menambahkan fungsi baru yaitu 'delete_item' yang menerima parameter request dan pk, yang berfungsi untuk menghapus data tertentu pada database. Path kelima fungsi baru ini juga ditambahkan pada bagian 'urlpatterns' di berkas 'urls.py'.
+- Membuat direktori `templates` pada root folder dan mengisinya dengan `base.html`, yang berfungsi sebagai template dasar/kerangka views dari web.
+- Menambahkan `templates` yang telah dibuat pada `settings.py`.
+- Mengubah `main.html` pada subdirektori `main/templates` dengan menggunakan `base.html` sebagai template utama.
+- Menghapus berkas `db.sqlite3` untuk mengosongkan objek pada model. Kemudian melakukan `import uuid` pada `models.py` dan dilanjutkan dengan melakukan migrasi perubahan tersebut.
+- Membuat berkas `forms.py` pada direktori `main` dan mengisinya sesuai model yang telah dibuat sebelumnya. 
+- Menambahkan import redirect pada `views.py` di direktori `main`, lalu membuat fungsi `create_food_entry` yang menerima parameter request. Fungsi ini melakukan redirect ke fungsi `show_main`.
+- Mengubah fungsi `show_main` sesuai kebutuhan web. Dalam web saya, fungsi ini mengambil data entri makanan yang sudah default dan yang dari database, kemudian menampilkannya pada halaman web. Context pada fungsi ini akan berubah sehingga berupa gabungan entri default dan database.
+- Menambahkan import `create_mood_entry` dan path fungsi ke berkas `urls.py`.
+- Membuat berkas HTML baru dengan nama `create_food_entry.html` pada direktori `main/templates` dan mengubah isinya sesuai kebutuhan web Food Pedia. Berkas ini berfungsi untuk menandakan block dengan metode POST, meningkatkan security terhadap serangan CSRF, menampilkan fields `forms.py` sebagai table, dan mengirim request ke view `create_food_entry(request)` dengan tombol submit.
+- Mengedit `main.html` untuk menambahkan tombol "Add New Food".
+- Pada berkas `views.py`, lakukan import `HttpResponse`, `Serializer`, dan membuat 4 fungsi baru untuk menampilkan data pada JSON dan XML. Fungsi tersebut adalah `show_xml`, `show_json`, `show_xml_by_id`, dan `show_json_by_id`.
+- Menambahkan fungsi baru yaitu `delete_item` yang menerima parameter request dan pk, yang berfungsi untuk menghapus data tertentu pada database. Path kelima fungsi baru ini juga ditambahkan pada bagian `urlpatterns` di berkas `urls.py`.
+- Membuat berkas `deploy.yml` pada direktori `.github/workflows/` agar dapat melakukan push ke GitHub sekaligus PWS.
 - Melakukan push perubahan ke GitHub, yang secara otomatis akan meneruskannya ke PWS dengan GitHub actions.
 
 ## Dokumentasi URL Postman
-'show_json': <img src="pictures/show_json.png">
-'show_xml': <img src="pictures/show_xml.png">
-'show_json_by_id': <img src="pictures/show_json_by_id.png">
-'show_xml_by_id': <img src="pictures/show_xml_by_id.png">
+`show_json`: <img src="pictures/show_json.png">
+`show_xml`: <img src="pictures/show_xml.png">
+`show_json_by_id`: <img src="pictures/show_json_by_id.png">
+`show_xml_by_id`: <img src="pictures/show_xml_by_id.png">

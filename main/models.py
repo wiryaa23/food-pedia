@@ -15,7 +15,6 @@ class FoodEntry(models.Model):
         validators=[MinValueValidator(0), MaxValueValidator(5)]
     )
 
-
     # @property
     # def is_mood_strong(self):
     #     return self.mood_intensity > 5

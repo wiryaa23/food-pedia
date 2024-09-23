@@ -101,3 +101,39 @@ Cara yang saya lakukan dalam tugas kali ini adalah sebagai berikut.
 `show_xml`: <img src="pictures/show_xml.png">
 `show_json_by_id`: <img src="pictures/show_json_by_id.png">
 `show_xml_by_id`: <img src="pictures/show_xml_by_id.png">
+
+
+# Jawaban Soal Tugas 4
+
+
+## 1. Apa perbedaan antara `HttpResponseRedirect()` dan `redirect()`?
+
+
+## 2. Jelaskan cara kerja penghubungan model `Product` dengan `User`!
+
+
+## 3. Apa perbedaan antara authentication dan authorization, apakah yang dilakukan saat pengguna login? Jelaskan bagaimana Django mengimplementasikan kedua konsep tersebut.
+
+
+## 4. Bagaimana Django mengingat pengguna yang telah login? Jelaskan kegunaan lain dari cookies dan apakah semua cookies aman digunakan?
+
+
+## 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+Cara yang saya lakukan dalam tugas kali ini adalah sebagai berikut.
+- Melakukan import `UserCreationForm` dan `messages`, serta menambahkan fungsi `register` pada `views.py`.
+- Membuat `register.html` di `main/templates` sebagai template tampilan halaman register.
+- Melakukan import fungsi `register` dan menambahkan pathnya di `urls.py` direktori `main`.
+- Melakukan import `authenticate`, `login`, dan `AuthenticationForm`, serta menambahkan fungsi `login_user` pada `views.py`. Semua ini berfungsi untuk melakukan autentikasi dan jika berhasil akan melakukan login.
+- Membuat `login.html` di `main/templates/` sebagai template tampilan halaman login.
+- Melakukan import fungsi `login_user` dan menambahkan pathnya di `urls.py` direktori `main`.
+- Membuat fitur logout dengan cara yang sama persis dengan pembuatan fitur login. Hanya saja, tampilannya diimplementasikan langsung di main.html karena hanya memerlukan tombol logout saja (tidak memerlukan halaman khusus).
+- Menggunakan data dari cookies, yaitu awalnya dengan import `HttpResponseRedirect`, `reverse`, dan `datetime` pada `views.py`.
+- Menambahkan fungsionalitas cookie untuk melihat waktu terakhir login pengguna pada fungsi `login_user`. Setelah perubahan, cookie last_login user akan ditambahkan ke dalam response yang diberikan server.
+- Menambahkan `'last_login': request.COOKIES['last_login']` ke `context` pada fungsi `show_main`.
+- Mengubah fungsi `logout_user` sehingga cookie `last_login` dihapus saat user logout.
+- Menambahkan informasi data sesi terakhir login pada `main.html`.
+- Menghubungkan model dengan user, yaitu pertama dengan melakukan import model pada `models.py` di `main`.'
+- Selanjutnya, hubungkan model dengan satu user melalui sebuah relationship.
+- Mengubah fungsi `create_food_entry` pada `views.py` untuk memungkinkan modifikasi objek sebelum disimpan di database.
+- Mengubah value dari `food_entries` dan `context` pada fungsi `show_main`. Hal ini dilakukan agar program dapat menampilkan objek Food Entry dari user yang sedang login saja.
+- Melakukan migrasi model untuk mengimplementasikan perubahan.

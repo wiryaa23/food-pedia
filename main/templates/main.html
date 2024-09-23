@@ -2,12 +2,17 @@
 {% block content %}
 <title>Food Pedia</title>
 
-<h1>{{app}}</b></h1>
-<p>An App by {{ name }} from {{ class }}</p>
+<h1 style="text-align: center;">
+    <span style="color: blue;">Food</span>
+    <span style="color: red;">Pedia</span>
+</h1>
+<p style="text-align: center;">An App by Wirya Dharma Kurnia from PBP C</p>
 
-<h2>Wondering What To Eat? We've Got You.</h2>
-<h3>Available Items:</h3>
-<ul>
+<h2 style="text-align: center;">Hi, {{ name }}! Any food in mind?</h2>
+<p style="text-align: center;">
+    <u>Available Items:</u>
+</p>
+<ul style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-left: 30 px; justify-content: center;">
     {% for item in food_entries %}
     <li>
         <h4>{{ item.name }}</h4>
@@ -19,41 +24,16 @@
     {% endfor %}
 </ul>
 
-<a href="{% url 'main:create_food_entry' %}">
-  <button>Add New Food</button>
-</a>
+<div class="button-row" style="display: flex; gap: 30px; justify-content: center;">
+    <a href="{% url 'main:create_food_entry' %}">
+        <button>Add New Food</button>
+    </a>
+
+    <a href="{% url 'main:logout' %}">
+        <button>Logout</button>
+    </a>
+</div>
+
+<h5 style="text-align: center;">Sesi terakhir login: {{ last_login }}</h5>
+
 {% endblock content %}
-
-
-<!-- <h1>Food Pedia</h1>
-
-<h5></h5>
-<p>{{ app }}</p>
-<h5>Name: </h5>
-<p>{{ name }}</p>
-<h5>Class: </h5>
-<p>{{ class }}</p> -->
-
-
-<!-- <head>
-    <title>Food Pedia</title>
-</head>
-
-<body>
-    <h1>{{app}}</b></h1>
-    <p>Nama: {{ name }}</p>
-    <p>Kelas: {{ class }}</p>
-    <h2>Wondering What To Eat? We've Got You.</h2>
-    <h3>Available Items:</h3>
-    <ul>
-        {% for item in items %}
-        <li>
-            <h4>{{ item.name }}</h4>
-            <p>Price: Rp {{ item.price }}</p>
-            <p>Description: {{ item.description }}</p>
-            <p>Stock: {{ item.stock }}</p>
-            <p>Rating: {{ item.rating }}</p>
-        </li>
-        {% endfor %}
-    </ul>
-</body> -->

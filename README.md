@@ -107,16 +107,67 @@ Cara yang saya lakukan dalam tugas kali ini adalah sebagai berikut.
 
 
 ## 1. Apa perbedaan antara `HttpResponseRedirect()` dan `redirect()`?
-
+Pada umumnya, `HttpResponseRedirect()` dan `redirect()` sama-sama bisa digunakan untuk melakukan pengalihan (redirect) ke URL lain. Namun, ada beberapa perbedaan dari keduanya yaitu sebagai berikut.
+-`HttpResponseRedirect()` merupakan kelas bawaan Django yang hanya dapat digunakan untuk melakukan redirect ke suatu URL tertentu, sehingga argumen yang diberikan hanya sebatas berupa URL saja. Cara kerjanya adalah dengan mengembalikan objek `HttpResponseRedirect()` dari view yang ingin ditampilkan.
+- `redirect()` bersifat lebih fleksibel dan umum, karena dapat melakukan redirect tidak hanya menggunakan URL, namun juga bisa menggunakan nama view dan objek model. Maka dari itu, `redirect()` dapat menerima lebih banyak argumen dibandingkan `HttpResponseRedirect()`.
 
 ## 2. Jelaskan cara kerja penghubungan model `Product` dengan `User`!
+Cara kerja penghubungan model `Product` dengan `User` terbagi menjadi 3 jenis hubungan, yaitu sebagai berikut.
+PS: Untuk contoh di bawah, anggaplah kita sudah melakukan import models dan User dengan cara:
+from django.db import models
+from django.contrib.auth.models import User
 
+* Many-to-many relationships
+Konsep hubungan ini adalah satu `Product` dapat dimiliki oleh banyak `User`, dan satu `User` juga dapat memiliki banyak `Product`. Analogi yang mungkin mudah dipahami adalah makanan sebagai `Product` dan restoran sebagai `User`. Satu makanan bisa dimiliki banyak restoran, dan satu restoran juga bisa memiliki banyak makanan. Untuk mengimplementasikan hubungan ini, kita dapat menggunakan `ManyToManyField()`.
+Contoh:
+class Product(models.Model):
+    name = models.CharField()
+    owner = models.ManyToManyField(User)
+* Many-to-one relationships
+Konsep hubungan ini adalah satu `Product` hanya dapat dimiliki oleh satu `User`, namun satu `User` dapat memiliki banyak `Product`. Analogi yang mungkin mudah dipahami adalah mainan sebagai `Product` dan anak sebagai `User`. Satu mainan hanya bisa dimiliki oleh satu anak, namun satu anak dapat memiliki banyak mainan. Untuk mengimplementasikan hubungan ini, kita dapat menggunakan `ForeignKey()`.
+Contoh:
+class Product(models.Model):
+    name = models.CharField()
+    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+Dalam contoh ini, `on_delete=models.CASCADE` akan menyebabkan penghapusan semua produk jika user yang memiliki model tersebut dihapus. Ini adalah jenis hubungan yang digunakan dalam tugas e-commerce Food Pedia kali ini.
+* One-to-one relationships
+Konsep hubungan ini adalah satu `Product` hanya dapat dimiliki oleh satu `User`, dan satu `User` juga hanya dapat memiliki satu `Product`. Analogi yang mungkin mudah dipahami adalah KTP sebagai `Product` dan seorang warga negara sebagai `User`. Satu KTP hanya bisa dimiliki oleh satu warga negara, dan satu warga negara juga hanya dapat memiliki satu KTP. Untuk mengimplementasikan hubungan ini, kita dapat menggunakan `OneToOneField()`.
+Contoh:
+class Product(models.Model):
+    name = models.CharField(max_length=100)
+    owner = models.OneToOneField(User, on_delete=models.CASCADE)
 
 ## 3. Apa perbedaan antara authentication dan authorization, apakah yang dilakukan saat pengguna login? Jelaskan bagaimana Django mengimplementasikan kedua konsep tersebut.
+- Authentication
+Merupakan proses memverifikasi identitas user. Langkah ini berfungsi untuk memastikan bahwa user yang sedang login benar merupakan user yang sah.
+Saat pengguna login, sistem akan memeriksa kredensial yang dimasukkan user misalnya seperti username dan password, lalu mencocokannya dengan informasi yang ada di database. Jika informasi dari user dan informasi dari database cocok, maka user akan mendapat izin untuk mengakses sistem.
+- Authorization
+Merupakan proses memverifikasi apakah user memiliki akses untuk mengakses sesuatu. Dengan kata lain, proses ini mengontrol akses user terhadap sumber daya yang ada pada sistem. Proses authorization baru akan dijalankan setelah user berhasil login.
+Setelah user berhasil login, akan dilakukan pemeriksaan otorisasi untuk setiap request user ketika mereka ingin mengakses bagian dari sistem yang memerlukan hak akses khusus.
 
+Django mengimplementasikan kedua konsep tersebut dengan alur sebagai berikut.
+- User akan mengakses URL melalui browser dan mengirimkan request ke internet. Request ini akan diteruskan ke web server.
+- Sebelum user diperbolehkan masuk ke server, Django akan melakukan authentication dan authorization pada session user. Authentication akan mengecek apakah user tersebut adalah user yang sah, dan authentication akan menentukan apakah user memiliki izin untuk mengakses sistem yang ada.
+- Jika kedua proses tersebut berhasil, maka Django akan meneruskan request ke web server. Di sini, argumen akan diekstrak melalui request sehingga dapat mengakses `views.py`. File ini berisi kode Python untuk menangani logika untuk menghasilkan respons web.
+- Setelah diproses di dalam `views.py`, value dari proses tersebut digabungkan dengan template HTML, CSS, dan JavaScript untuk membentuk halaman web yang akan dikirim kembali kepada user.
+- Halaman web yang dihasilkan akan dikirim kembali ke user melalui internet, sehingga user dapat melihat halaman web yang diinginkan melalui browser mereka.
+
+Dari kode pada tugas ini, kedua proses ini dapat diamati kerjanya melalui `views.py`. Contoh proses authentication adalah method `login_user`, dimana user akan diminta untuk memasukkan kredensial (username dan password) dan jika kredensialnya valid (cocok dengan informasi di database), user akan dianggap terautentikasi dan status login akan disimpan di session. Sedangkan contoh proses authorization adalah bagian `@login_required(login_url='/login')` di atas method yang ada. Artinya, method yang bersangkutan baru dapat digunakan oleh user yang telah berhasil login. Karena dalam tugas kali ini belum ada akses khusus untuk user tertentu, maka asal user berhasil login artinya ia dapat menggunakan semua method yang tersedia.
 
 ## 4. Bagaimana Django mengingat pengguna yang telah login? Jelaskan kegunaan lain dari cookies dan apakah semua cookies aman digunakan?
+Dalam mengingat user yang telah login, Django menggunakan session framework yang berfungsi membuat sesi baru dan menyimpan informasi user di dalam server (database atau memori). Setelah itu, sebuah cookie dengan ID sesi user akan dikirim ke browser user. Dengan cara ini, setiap kali user mengirim request ke server maka Django dapat mengidentifikasi sesi user dan memuat informasi yang dibutuhkan.
 
+Selain menyimpan infromasi login user, kegunaan lain dari cookies adalah sebagai berikut.
+- Menyimpan preferensi user: Cookies dapat membantu menyimpan informasi mengenai preferensi user misalnya seperti mode warna web atau bahasa yang digunakan. Dengan begitu, user tidak perlu mengatur hal seperti ini lagi setiap kali mereka menggunakan web tersebut.
+- Personalisasi user: Cookies dapat membantu web untuk menyesuaikan jenis konten yang disajikan kepada user berdasarkan perilaku dan preferensi user selama menggunakan web. Dengan begitu, user akan disajikan dengan konten yang sering dilihat atau direkomendasikan fitur tertentu yang sering ia gunakan.
+- Tracking digital: Selain untuk personalisasi, cookies juga dapat digunakan untuk menganalisis aktivitas user sehingga dapat berguna dalam analisis dan pemasaran. Informasi ini dapat digunakan dalam bisnis, misalnya untuk menampilkan iklan sesuai dengan aktivitas user selama menggunakan web.
+- Khusus untuk bisnis e-commerce, cookies dapat membantu untuk personalisasi pengalaman user. Hal ini diimplementasikan dalam berbagai hal, misalnya fitur keranjang belanja, menyimpan alamat yang sering digunakan user, jenis layanan yang menjadi preferensi user, dan masih banyak lagi.
+
+Apakah semua cookies aman digunakan?
+Pada umumnya, cookies aman digunakan karena tidak  menyimpan informasi sensitif atau kode berbahaya. Cookies juga tidak dapat melakukan tindakan sendiri tanpa persetujuan user yang bersangkutan. Meski demikian, ada beberapa hal yang harus diperhatikan dalam penggunaan cookies.
+- Cookies dapat berupa cookies sesi (berlaku untuk sesi login user saat ini, dan akan dihapus ketika user logout) dan cookies permanen (disimpan di perangkat user). Cookies permanen bersifat lebih rentan terhadap serangan jika tidak dikelola dengan aman.
+- Karena merupakan file teks biasa, cookies berpotensi diambil oleh aplikasi lain jika jaringan yang digunakan tidak aman.
+- Hindari cookies yang menyimpan informasi sensitif. Jika memang menggunakannya, gunakanlah HTTPS (Hypertext Transfer Protocol Secure, yang merupakan versi lebih aman dari HTTP) untuk melakukan enkripsi data.
 
 ## 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
 Cara yang saya lakukan dalam tugas kali ini adalah sebagai berikut.

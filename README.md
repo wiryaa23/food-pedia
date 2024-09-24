@@ -199,3 +199,4 @@ Cara yang saya lakukan dalam tugas kali ini adalah sebagai berikut.
 - Mengubah fungsi `create_food_entry` pada `views.py` untuk memungkinkan modifikasi objek sebelum disimpan di database.
 - Mengubah value dari `food_entries` dan `context` pada fungsi `show_main`. Hal ini dilakukan agar program dapat menampilkan objek Food Entry dari user yang sedang login saja.
 - Melakukan migrasi model untuk mengimplementasikan perubahan.
+</details>

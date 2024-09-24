@@ -6,6 +6,8 @@
 
 **Link Web:** [http://wirya-dharma-foodpedia.pbp.cs.ui.ac.id/](http://wirya-dharma-foodpedia.pbp.cs.ui.ac.id/)
 
+<details>
+<summary><b>Tugas 2</b></summary>
 # Jawaban Soal Tugas 2
 
 
@@ -46,7 +48,10 @@ Menurut saya, framework Django dijadikan permulaan pembelajaran pengembangan per
 
 ## 5. Mengapa model pada Django disebut sebagai ORM?
 Model pada Django disebut sebagai ORM (Object Relational Mapping) karena menyediakan suatu lapisan abstraksi untuk interaksi dengan basis data  menggunakan Python, tanpa harus menulis query SQL secara langsung. ORM akan memetakan objek ke tabel dalam kelas Python, sehingga dapat memudahkan developer dalam melakukan operasi basis data seperti menambah, mengubah, ataupun menghapus data.
+</details>
 
+<details>
+<summary><b>Tugas 3</b></summary>
 
 # Jawaban Soal Tugas 3
 
@@ -101,7 +106,10 @@ Cara yang saya lakukan dalam tugas kali ini adalah sebagai berikut.
 `show_xml`: <img src="pictures/show_xml.png">
 `show_json_by_id`: <img src="pictures/show_json_by_id.png">
 `show_xml_by_id`: <img src="pictures/show_xml_by_id.png">
+</details>
 
+<details>
+<summary><b>Tugas 4</b></summary>
 
 # Jawaban Soal Tugas 4
 

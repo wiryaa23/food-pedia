@@ -123,28 +123,30 @@ Pada umumnya, `HttpResponseRedirect()` dan `redirect()` sama-sama bisa digunakan
 ## 2. Jelaskan cara kerja penghubungan model `Product` dengan `User`!
 Cara kerja penghubungan model `Product` dengan `User` terbagi menjadi 3 jenis hubungan, yaitu sebagai berikut.
 PS: Untuk contoh di bawah, anggaplah kita sudah melakukan import models dan User dengan cara:
-from django.db import models
-from django.contrib.auth.models import User
+`from django.db import models`
+`from django.contrib.auth.models import User`
 
 * Many-to-many relationships
 Konsep hubungan ini adalah satu `Product` dapat dimiliki oleh banyak `User`, dan satu `User` juga dapat memiliki banyak `Product`. Analogi yang mungkin mudah dipahami adalah makanan sebagai `Product` dan restoran sebagai `User`. Satu makanan bisa dimiliki banyak restoran, dan satu restoran juga bisa memiliki banyak makanan. Untuk mengimplementasikan hubungan ini, kita dapat menggunakan `ManyToManyField()`.
 Contoh:
-class Product(models.Model):
-    name = models.CharField()
-    owner = models.ManyToManyField(User)
+
+`class Product(models.Model):`
+    `name = models.CharField()`
+    `owner = models.ManyToManyField(User)`
 * Many-to-one relationships
 Konsep hubungan ini adalah satu `Product` hanya dapat dimiliki oleh satu `User`, namun satu `User` dapat memiliki banyak `Product`. Analogi yang mungkin mudah dipahami adalah mainan sebagai `Product` dan anak sebagai `User`. Satu mainan hanya bisa dimiliki oleh satu anak, namun satu anak dapat memiliki banyak mainan. Untuk mengimplementasikan hubungan ini, kita dapat menggunakan `ForeignKey()`.
 Contoh:
-class Product(models.Model):
-    name = models.CharField()
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+
+`class Product(models.Model):`
+    `name = models.CharField()`
+    `owner = models.ForeignKey(User, on_delete=models.CASCADE)`
 Dalam contoh ini, `on_delete=models.CASCADE` akan menyebabkan penghapusan semua produk jika user yang memiliki model tersebut dihapus. Ini adalah jenis hubungan yang digunakan dalam tugas e-commerce Food Pedia kali ini.
 * One-to-one relationships
 Konsep hubungan ini adalah satu `Product` hanya dapat dimiliki oleh satu `User`, dan satu `User` juga hanya dapat memiliki satu `Product`. Analogi yang mungkin mudah dipahami adalah KTP sebagai `Product` dan seorang warga negara sebagai `User`. Satu KTP hanya bisa dimiliki oleh satu warga negara, dan satu warga negara juga hanya dapat memiliki satu KTP. Untuk mengimplementasikan hubungan ini, kita dapat menggunakan `OneToOneField()`.
 Contoh:
-class Product(models.Model):
-    name = models.CharField(max_length=100)
-    owner = models.OneToOneField(User, on_delete=models.CASCADE)
+`class Product(models.Model):`
+    `name = models.CharField()`
+    `owner = models.OneToOneField(User, on_delete=models.CASCADE)`
 
 ## 3. Apa perbedaan antara authentication dan authorization, apakah yang dilakukan saat pengguna login? Jelaskan bagaimana Django mengimplementasikan kedua konsep tersebut.
 - Authentication

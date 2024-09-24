@@ -139,9 +139,11 @@ class Product(models.Model):
 
 ## 3. Apa perbedaan antara authentication dan authorization, apakah yang dilakukan saat pengguna login? Jelaskan bagaimana Django mengimplementasikan kedua konsep tersebut.
 - Authentication
+
 Merupakan proses memverifikasi identitas user. Langkah ini berfungsi untuk memastikan bahwa user yang sedang login benar merupakan user yang sah.
 Saat pengguna login, sistem akan memeriksa kredensial yang dimasukkan user misalnya seperti username dan password, lalu mencocokannya dengan informasi yang ada di database. Jika informasi dari user dan informasi dari database cocok, maka user akan mendapat izin untuk mengakses sistem.
 - Authorization
+
 Merupakan proses memverifikasi apakah user memiliki akses untuk mengakses sesuatu. Dengan kata lain, proses ini mengontrol akses user terhadap sumber daya yang ada pada sistem. Proses authorization baru akan dijalankan setelah user berhasil login.
 Setelah user berhasil login, akan dilakukan pemeriksaan otorisasi untuk setiap request user ketika mereka ingin mengakses bagian dari sistem yang memerlukan hak akses khusus.
 
@@ -164,6 +166,7 @@ Selain menyimpan infromasi login user, kegunaan lain dari cookies adalah sebagai
 - Khusus untuk bisnis e-commerce, cookies dapat membantu untuk personalisasi pengalaman user. Hal ini diimplementasikan dalam berbagai hal, misalnya fitur keranjang belanja, menyimpan alamat yang sering digunakan user, jenis layanan yang menjadi preferensi user, dan masih banyak lagi.
 
 Apakah semua cookies aman digunakan?
+
 Pada umumnya, cookies aman digunakan karena tidak  menyimpan informasi sensitif atau kode berbahaya. Cookies juga tidak dapat melakukan tindakan sendiri tanpa persetujuan user yang bersangkutan. Meski demikian, ada beberapa hal yang harus diperhatikan dalam penggunaan cookies.
 - Cookies dapat berupa cookies sesi (berlaku untuk sesi login user saat ini, dan akan dihapus ketika user logout) dan cookies permanen (disimpan di perangkat user). Cookies permanen bersifat lebih rentan terhadap serangan jika tidak dikelola dengan aman.
 - Karena merupakan file teks biasa, cookies berpotensi diambil oleh aplikasi lain jika jaringan yang digunakan tidak aman.

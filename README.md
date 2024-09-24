@@ -212,7 +212,7 @@ Cara yang saya lakukan dalam tugas kali ini adalah sebagai berikut.
 - Menambahkan `'last_login': request.COOKIES['last_login']` ke `context` pada fungsi `show_main`.
 - Mengubah fungsi `logout_user` sehingga cookie `last_login` dihapus saat user logout.
 - Menambahkan informasi data sesi terakhir login pada `main.html`.
-- Menghubungkan model dengan user, yaitu pertama dengan melakukan import model pada `models.py` di `main`.'
+- Menghubungkan model dengan user, yaitu pertama dengan melakukan import model pada `models.py` di `main`.
 - Selanjutnya, hubungkan model dengan satu user melalui sebuah relationship.
 - Mengubah fungsi `create_food_entry` pada `views.py` untuk memungkinkan modifikasi objek sebelum disimpan di database.
 - Mengubah value dari `food_entries` dan `context` pada fungsi `show_main`. Hal ini dilakukan agar program dapat menampilkan objek Food Entry dari user yang sedang login saja.

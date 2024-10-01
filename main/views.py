@@ -130,8 +130,6 @@ def edit_food(request, id):
     context = {'form': form}
     return render(request, "edit_food.html", context)
 
-
-
 def delete_food(request, id):
     food = FoodEntry.objects.get(pk = id)
     food.delete()

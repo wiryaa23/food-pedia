@@ -218,3 +218,111 @@ Cara yang saya lakukan dalam tugas kali ini adalah sebagai berikut.
 - Mengubah value dari `food_entries` dan `context` pada fungsi `show_main`. Hal ini dilakukan agar program dapat menampilkan objek Food Entry dari user yang sedang login saja.
 - Melakukan migrasi model untuk mengimplementasikan perubahan.
 </details>
+
+<details>
+<summary><b>Tugas 5</b></summary>
+
+# Jawaban Soal Tugas 4
+
+
+## 1. Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut!
+- Inline style
+Gaya yang diterapkan langsung pada elemen HTML menggunakan atribut *style* . Karena gaya ini langsung ditulis pada elemen, maka akan ditempatkan di urutan paling atas sehingga menimpa gaya lain yang diterapkan pada elemen HTML.
+Contoh:
+```html
+<div style="color: red;">Text</div>
+```
+- ID Selector
+Selector yang menggunakan ID yang bersifat unik.
+Contoh:
+```css
+#myElement {
+    color: blue;
+}
+```
+- Classes, Attributes, dan Pseudo-Classes
+Selector yang menggunakan kelas, atribut, dan pseudo-class.
+Contoh:
+```css
+.myClass {
+    color: green;
+}
+[type="text"] {
+    color: yellow;
+}
+```
+- Element (Tag) dan Pseudo-Elements
+Selector yang menggunakan tag HTML dan pseudo-element.
+Contoh:
+```css
+div {
+    color: black;
+}
+```
+- Universal Selector
+Selector universal yang berlaku untuk semua elemen.
+Contoh:
+```css
+* {
+    color: gray;
+}
+```
+
+## 2. Mengapa *responsive design* menjadi konsep yang penting dalam pengembangan aplikasi *web*? Berikan contoh aplikasi yang sudah dan belum menerapkan *responsive design*!
+*Responsive design* menjadi konsep yang penting dalam pengembangan aplikasi *web* karena memiliki fungsi penting yaitu untuk meningkatkan pengalaman pengguna, memperbaiki SEO (*Search Engine Optimization*), serta membuat proses pengembangan menjadi lebih efisien. Hal ini menjadi penting di era modern ini karena pengguna cenderung mengakses aplikasi *web* dari berbagai perangkat dengan ukuran layar yang berbeda, seperti ponsel, tablet, laptop, dan desktop.
+Contoh aplikasi yang sudah menerapkan *responsive design* adalah YouTube dan Spotify. Kedua aplikasi tersebut telah menyesuaikan antarmuka mereka secara dinamis sesuai perangkat yang digunakan oleh pengguna. Sementara itu, contoh aplikasi yang belum menerapkan *responsive design* adalah SIAKNG. Aplikasi ini belum menerapkan *responsive design* secara penuh sehingga pengalaman pengguna cenderung kurang optimal ketika mengaksesnya dari berbagai perangkat dengan ukuran layar yang berbeda.
+
+## 3. Jelaskan perbedaan antara *margin*, *border*, dan *padding*, serta cara untuk mengimplementasikan ketiga hal tersebut!
+Secara umum *margin*, *border*, dan *padding* merupakan tiga elemen penting dalam box model CSS yang digunakan untuk mengontrol ruang di sekitar elemen HTML. 
+- *Margin*
+Ruang kosong di luar border elemen, yang memisahkan elemen dari elemen lain di sekitarnya. 
+Contoh:
+```css
+div {
+    margin: 20px;
+}
+```
+- *Border*
+Garis terlihat yang mengelilingi elemen dan dapat disesuaikan ketebalan, jenis, dan warnanya; serta terletak di antara *margin* dan *padding*.
+Contoh:
+```css
+div {
+    border: 2px solid black;
+}
+```
+- *Padding*
+Ruang kosong di dalam elemen di antara elemen dan border, sehingga elemen tidak langsung menempel pada border.
+Contoh:
+```css
+div {
+    padding: 15px;
+}
+```
+Ketiganya juga dapat diimplementasikan bersamaan menggunakan properti CSS, seperti contoh sebagai berikut.
+```css
+.element {
+    margin: 20px;           /* Ruang di luar border */
+    border: 2px solid blue; /* Border berwarna biru setebal 2px */
+    padding: 15px;          /* Ruang di dalam border */
+}
+```
+
+## 4. Jelaskan konsep *flexbox* dan *grid layout* beserta kegunaannya!
+*Flexbox* dan *Grid Layout* merupakan dua teknik tata letak pada CSS yang fungsinya untuk merancang dan mengatur tata letak elemen pada halaman web dengan fleksibel dan efisien. Keduanya memiliki peran yang penting dalam pembuatan desain web responsif.
+- *Flexbox* adalah model tata letak yang dirancang untuk satu dimensi (baik baris atau kolom) yang memungkinkan distribusi ruang antar elemen di dalam *container* secara fleksibel dan merata, meski jika ukuran elemen-elemen tersebut tidak tetap. *Flexbox* sangat membantu dalam membuat navigasi, menu, atau elemen yang membutuhkan penyesuaian responsif dalam satu arah.
+- Grid Layout adalah model tata letak dua dimensi (baris dan kolom) yang lebih kompleks karena dapat membuat tata letak yang lebih detail dengan membagi halaman web menjadi *grid* (kotak-kotak) dan menempatkan elemen di posisi tertentu. *Grid Layout* memungkinkan kontrol penuh atas tata letak dalam dua arah sekaligus, baik horizontal maupun vertikal. Tata letak ini cocok digunakan untuk desain kompleks seperti *dashboard*, *layout* halaman utama, dan lain-lain.
+
+## 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
+Cara yang saya lakukan dalam tugas kali ini adalah sebagai berikut.
+- Menambahkan fungsi baru pada `views.py` yaitu `edit_food` yang berfungsi untuk mengedit data produk dan `delete_food` yang berfungsi untuk menghapus produk yang sudah ada.
+- Melakukan import dan menambahkan path dua fungsi baru tersebut di `urls.py`.
+- Membuat folder `static` yang di dalamnya terdapat folder `css` sebagai tempat penyimpanan `global.css` yang berfungsi untuk mendefinisikan gaya yang berlaku secara global di aplikasi web, dan `image` sebagai tempat penyimpanan gambar yang digunakan dalam aplikasi web.
+- Melakukan *adjustment* pada `settings.py` agar dapat menggunakan static files yang ada.
+- Mengubah `base.html` karena aplikasi web kali ini akan menggunakan Tailwind.
+- Membuat `navbar.html` yang berfungsi sebagai file untuk mengatur *navigation bar* pada aplikasi web.
+- Membuat design dari *navigation bar* sesuai selera.
+- Membuat beberapa file lain seperti `card_food.html`, `card_info.html`, `edit_food.html`, `login_html`, dan `register_html` untuk melengkapi fungsionalitas aplikasi web. Tampilan masing-masing halaman juga disesuaikan sesuai fungsi dan selera.
+- Mengubah `main.html` untuk menampilkan produk yang ada dengan menggunakan tampilan `card_food.html`.
+- Melengkapi tampilan *card* setiap produk dengan tombol edit dan hapus produk.
+- Melakukan add, commit, dan push semua perubahan ke GitHub dan PWS.
+</details>

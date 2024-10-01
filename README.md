@@ -117,7 +117,7 @@ Cara yang saya lakukan dalam tugas kali ini adalah sebagai berikut.
 
 ## 1. Apa perbedaan antara `HttpResponseRedirect()` dan `redirect()`?
 Pada umumnya, `HttpResponseRedirect()` dan `redirect()` sama-sama bisa digunakan untuk melakukan pengalihan (redirect) ke URL lain. Namun, ada beberapa perbedaan dari keduanya yaitu sebagai berikut.
--`HttpResponseRedirect()` merupakan kelas bawaan Django yang hanya dapat digunakan untuk melakukan redirect ke suatu URL tertentu, sehingga argumen yang diberikan hanya sebatas berupa URL saja. Cara kerjanya adalah dengan mengembalikan objek `HttpResponseRedirect()` dari view yang ingin ditampilkan.
+- `HttpResponseRedirect()` merupakan kelas bawaan Django yang hanya dapat digunakan untuk melakukan redirect ke suatu URL tertentu, sehingga argumen yang diberikan hanya sebatas berupa URL saja. Cara kerjanya adalah dengan mengembalikan objek `HttpResponseRedirect()` dari view yang ingin ditampilkan.
 - `redirect()` bersifat lebih fleksibel dan umum, karena dapat melakukan redirect tidak hanya menggunakan URL, namun juga bisa menggunakan nama view dan objek model. Maka dari itu, `redirect()` dapat menerima lebih banyak argumen dibandingkan `HttpResponseRedirect()`.
 
 ## 2. Jelaskan cara kerja penghubungan model `Product` dengan `User`!

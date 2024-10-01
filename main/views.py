@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from main.forms import FoodEntryForm
 from main.models import FoodEntry
 from django.http import HttpResponse
@@ -37,9 +37,9 @@ def show_main(request):
 
     database_items = []
     for entry in food_entries:
-        database_items.append({'name': entry.name, 'price': entry.price, 'description': entry.description, 'quantity': entry.quantity, 'rating': entry.rating})
+        database_items.append({'name': entry.name, 'price': entry.price, 'description': entry.description, 'quantity': entry.quantity, 'rating': entry.rating, 'id': entry.id})
     
-    all_entry = default_items + database_items
+    all_entry = database_items
     context = {
         'app': 'Food Pedia',
         'name': request.user.username,
@@ -105,8 +105,11 @@ def login_user(request):
             response = HttpResponseRedirect(reverse("main:show_main"))
             response.set_cookie('last_login', str(datetime.datetime.now()))
             return response
+        else:
+            messages.error(request, "Oops, incorrect username or password!")
+            return redirect('main:login')
    else:
-      form = AuthenticationForm(request)
+        form = AuthenticationForm(request)
    context = {'form': form}
    return render(request, 'login.html', context)
 
@@ -115,3 +118,21 @@ def logout_user(request):
     response = HttpResponseRedirect(reverse('main:login'))
     response.delete_cookie('last_login')
     return response
+
+def edit_food(request, id):
+    food = FoodEntry.objects.get(pk = id)
+    form = FoodEntryForm(request.POST or None, instance=food)
+
+    if form.is_valid() and request.method == "POST":
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+
+    context = {'form': form}
+    return render(request, "edit_food.html", context)
+
+
+
+def delete_food(request, id):
+    food = FoodEntry.objects.get(pk = id)
+    food.delete()
+    return HttpResponseRedirect(reverse('main:show_main'))

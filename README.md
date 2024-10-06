@@ -336,12 +336,17 @@ Cara yang saya lakukan dalam tugas kali ini adalah sebagai berikut.
 ## 1.  Jelaskan manfaat dari penggunaan JavaScript dalam pengembangan aplikasi web!
 Penggunaan JavaScript dalam pengembangan aplikasi web yang utama adalah menjadikan aplikasi web bersifat lebih dinamis. Dengan JavaScript, browser dapat merespons aksi pengguna, mengubah tata letak konten pada halaman, hingga memberi pembaruan real-time jika diperlukan tanpa memuat ulang keseluruhan halaman. Beberapa manfaat dari penggunaan JavaScript dalam pengembangan aplikasi web adalah sebagai berikut.
 - **Interaksi yang lebih dinamis**
+
 JavaScript memungkinkan browser menjadi lebih interaktif dengan pengguna sehingga meningkatkan pengalaman mereka dalam menggunakan aplikasi web.
 - **Meningkatkan responsivitas**
+
 JavaScript dapat mengeksekusi kode di sisi klien, sehingga mengurangi beban server dan responsivitas aplikasi web dapat meningkat karena data diproses secara lokal.
 - **Integrasi dengan API**
+
 JavaScript mendukung integrasi dengan API eksternal, sehingga lebih mudah untuk mengambil data dari sumber lain dan menampilkannya pada web secara dinamis.
 - **Ketersediaan *framework* dan *library***
+
 JavaScript memiliki banyak *framework* dan *library* yang mampu meningkatkan efisiensi waktu dan tenaga dalam pengembangan aplikasi web
 - **Kemampuan lintas platform dan pengembangan mobile**
+
 Saat ini, JavaScript telah didukung penggunaannya oleh banyak browser modern. Hal ini menyebabkan aplikasi web akan mudah diakses melalui berbagai perangkat dan sistem operasi. JavaScript juga memungkinkan penggunaan satu bahasa untuk berbagai platform.

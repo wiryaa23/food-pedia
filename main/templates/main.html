@@ -99,9 +99,8 @@
 
         if (foodEntries.length === 0) {
             htmlString = `
-                <div class="flex flex-col items-center justify-center min-h-[24rem] p-6">
-                    <img src="{% static 'image/sedih-banget.png' %}" alt="Sad face" class="w-32 h-32 mb-4"/>
-                    <p class="text-center text-gray-600 mt-4">Belum ada data makanan pada sistem.</p>
+                <div class="flex flex-col items-center justify-center min-h-[10rem] p-6">
+                    <p class="text-center text-red-600 mt-4 font-bold text-3xl">No food yet. Try adding some.</p>
                 </div>
             `;
         } else {

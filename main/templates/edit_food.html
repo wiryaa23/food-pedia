@@ -8,8 +8,8 @@
 {% include 'navbar.html' %}
 
 <div class="min-h-screen flex items-center justify-center w-screen py-12 px-4 sm:px-6 lg:px-8" style="background-image: url('/static/image/login_register_bg.jpg'); background-size: cover; background-position: center;">
-  <div class="max-w-lg w-2/3 bg-white bg-opacity-60 p-8 rounded-md shadow-lg">
-    <h1 class="text-2xl font-bold mb-6 text-center text-red-500">Edit Food</h1>
+  <div class="max-w-lg w-2/3 bg-white bg-opacity-70 p-8 rounded-lg shadow-lg">
+    <h1 class="text-3xl font-bold mb-6 text-center text-red-500">Edit Food</h1>
 
     <form method="POST" class="space-y-4">
       {% csrf_token %}
@@ -22,7 +22,7 @@
             {{ field }}
           </div>
           {% if field.help_text %}
-            <p class="mt-1 text-sm text-gray-500">{{ field.help_text }}</p>
+            <p class="mt-1 text-sm text-red-500">{{ field.help_text }}</p>
           {% endif %}
           {% for error in field.errors %}
             <p class="mt-1 text-sm text-red-600">{{ error }}</p>
@@ -39,3 +39,4 @@
 </div>
 
 {% endblock %}
+

@@ -2,6 +2,7 @@ from django.urls import path
 from main.views import show_main, create_food_entry, show_xml, show_json, show_xml_by_id, show_json_by_id, delete_item
 from main.views import register, login_user, logout_user
 from main.views import edit_food, delete_food
+from main.views import add_food_entry_ajax
 
 app_name = 'main'
 
@@ -18,5 +19,6 @@ urlpatterns = [
     path('logout/', logout_user, name='logout'),
     path('edit-food/<uuid:id>', edit_food, name='edit_food'),
     path('delete/<uuid:id>', delete_food, name='delete_food'),
+    path('create-food-entry-ajax', add_food_entry_ajax, name='add_food_entry_ajax'),
+    
 ]
-

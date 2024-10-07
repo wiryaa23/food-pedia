@@ -152,6 +152,7 @@ class Product(models.Model):
 ```
 
 Dalam contoh ini, `on_delete=models.CASCADE` akan menyebabkan penghapusan semua produk jika user yang memiliki model tersebut dihapus. Ini adalah jenis hubungan yang digunakan dalam tugas e-commerce Food Pedia kali ini.
+
 * One-to-one relationships
 
 Konsep hubungan ini adalah satu `Product` hanya dapat dimiliki oleh satu `User`, dan satu `User` juga hanya dapat memiliki satu `Product`. Analogi yang mungkin mudah dipahami adalah KTP sebagai `Product` dan seorang warga negara sebagai `User`. Satu KTP hanya bisa dimiliki oleh satu warga negara, dan satu warga negara juga hanya dapat memiliki satu KTP. Untuk mengimplementasikan hubungan ini, kita dapat menggunakan `OneToOneField()`.
@@ -350,3 +351,29 @@ JavaScript memiliki banyak *framework* dan *library* yang mampu meningkatkan efi
 - **Kemampuan lintas platform dan pengembangan mobile**
 
 Saat ini, JavaScript telah didukung penggunaannya oleh banyak browser modern. Hal ini menyebabkan aplikasi web akan mudah diakses melalui berbagai perangkat dan sistem operasi. JavaScript juga memungkinkan penggunaan satu bahasa untuk berbagai platform.
+
+## 2. Jelaskan fungsi dari penggunaan `await` ketika kita menggunakan `fetch()`! Apa yang akan terjadi jika kita tidak menggunakan `await`?
+Dalam mengembangkan aplikasi web khususnya dengan JavaScript, penggunaan `await` ketika menggunakan `fetch()` memegang peran penting untuk menangani operasi asinkronus secara mudah dan intuitif. Ketika melakukan HTTP request dengan `fetch()`, operasi membutuhkan waktu untuk eksekusi kode terutama jika membutuhkan data dari server. Karena operasi ini bersifat asinkronus, maka ia akan mengembalikan *promise* yang artinya proses akan berlanjut ke kode berikutnya tanpa menunggu respon server. 
+
+Penggunaan `await` dalam hal ini berguna untuk menunggu hingga `fetch()` selesai, sehingga JavaScript akan menghentikan proses pada baris kode yang bersangkutan dan menunggu *promise* dari `fetch()`.
+
+Jika kita tidak menggunakan `await`, maka kode berikutnya akan dieksekusi sebelum *promise* dari `fetch()` selesai dikembalikan. Akibatnya, kita harus menggunakan `.then()` agar *promise* dari `fetch()` selesai sebelum mengakses data yang dikembalikan dari server. Pendekatan ini membuat kode lebih sulit dibaca khususnya jika banyak operasi asinkronus yang perlu dikelola. Selain itu, kode juga lebih sulit dipelihara terutama jika menangani skenario yang kompleks. Jika kode mencoba mengakses data yang belum tersedia dari respon server, maka dapat mengakibatkan kesalahan data atau bahkan error selama proses eksekusi kode.
+
+Intinya, `await` membuat kode lebih mudah dibaca dan dikelola karena menunggu hingga *promise* yang asinkronus dari `fetch()` selesai sebelum mengeksekusi kode selanjutnya. Tanpa `await`, kode tidak akan menunggu sehingga harus menggunakan `.then()` yang cenderung kurang efisien untuk mengelola respon. Jika proses menunggu ini tidak dilakukan sama sekali baik dengan `await` maupun `.then()`, maka dapat menyebabkan kesalahan data atau error dalam eksekusi kode.
+
+## 3. Mengapa kita perlu menggunakan *decorator* `csrf_exempt` pada view yang akan digunakan untuk AJAX `POST`?
+Pada umumnya, Django telah menerapkan perlindungan Cross-Site Request Forgery (CSRF) secara *by default* kepada view yang menerima POST request. Dengan adanya perlindungan ini, setiap POST request harus menyertakan token CSRF yang valid yang disertakan melalui form HTML dengan tag {% csrf_token %}. 
+
+Meski dilakukan demi keamanan, menyertakan token CSRF ini dapat menjadi tantangan khususnya dalam konteks AJAX POST request yang berasal dari domain berbeda atau aplikasi *single-page*. Hal tersebut terjadi karena AJAX POST request seringkali bersifat dinamis tanpa melakukan *refresh* halaman secara langsung, sehingga menyebabkan tidak adanya akses ke token CSRF yang di-*generate* oleh server.
+
+Dalam hal ini, *decorator* `@csrf_exempt` berfungsi untuk menonaktifkan perlindungan CSRF pada view tertentu, sehingga memungkinkan permintaan POST tanpa menyertakan token CSRF.
+
+Menonaktifkan perlindungan CSRF pada suatu view tentunya membuka celah dalam hal keamanan aplikasi web. Maka dari itu, penggunaan *decorator* `@csrf_exempt` sebaiknya dilakukan dengan bijak dan hanya ketika dibutuhkan saja. Penggunaannya pun sebaiknya diimbangi dengan mekanisme keamanan tambahan untuk meminimalisir adanya serangan CSRF terhadap aplikasi web.
+
+## 4. Pada tutorial PBP minggu ini, pembersihan data *input* pengguna dilakukan di belakang (*backend*) juga. Mengapa hal tersebut tidak dilakukan di *frontend* saja?
+
+
+## 5. Jelaskan bagaimana cara kamu mengimplementasikan *checklist* di atas secara *step-by-step* (bukan hanya sekadar mengikuti tutorial)!
+Cara yang saya lakukan dalam tugas kali ini adalah sebagai berikut.
+- 
+</details>

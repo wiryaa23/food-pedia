@@ -11,15 +11,36 @@
         <form method="POST">
             {% csrf_token %}
             <div class="space-y-4">
-                <input type="text" name="name" placeholder="Food Name" class="block w-full p-2 border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500" required>
                 
-                <input type="number" name="price" placeholder="Price" class="block w-full p-2 border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500" required />
+                <div>
+                    {% if form.name.errors %}
+                        <div class="text-red-500 text-sm">
+                            {{ form.name.errors }}
+                        </div>
+                    {% endif %}
+                    <input type="text" name="name" value="{{ form.name.value|default_if_none:'' }}" placeholder="Food Name" class="block w-full p-2 border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500" required>
+                </div>
                 
-                <textarea name="description" placeholder="Description" class="block w-full p-2 border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500" rows="3" required></textarea>
+                <div>
+                    <input type="number" name="price" value="{{ form.price.value|default_if_none:'' }}" placeholder="Price" class="block w-full p-2 border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500" required>
+                </div>
                 
-                <input type="number" name="quantity" placeholder="Quantity" class="block w-full p-2 border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500" required />
+                <div>
+                    {% if form.description.errors %}
+                        <div class="text-red-500 text-sm">
+                            {{ form.description.errors }}
+                        </div>
+                    {% endif %}
+                    <textarea name="description" placeholder="Description" class="block w-full p-2 border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500" rows="3" required>{{ form.description.value|default_if_none:'' }}</textarea>
+                </div>
                 
-                <input type="number" name="rating" placeholder="Rating (0-5)" class="block w-full p-2 border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500" step="0.1" min="0" max="5" required />
+                <div>
+                    <input type="number" name="quantity" value="{{ form.quantity.value|default_if_none:'' }}" placeholder="Quantity" class="block w-full p-2 border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500" required>
+                </div>
+                
+                <div>
+                    <input type="number" name="rating" value="{{ form.rating.value|default_if_none:'' }}" placeholder="Rating (0-5)" class="block w-full p-2 border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500" step="0.1" min="0" max="5" required>
+                </div>
 
                 <div class="flex justify-end">
                     <input type="submit" value="Add Food" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105" />
@@ -27,14 +48,6 @@
             </div>
         </form>
 
-        {% if messages %}
-            <script>
-                document.addEventListener("DOMContentLoaded", function() {
-                alert("Ha! I see what you did there!");
-                    
-                });
-            </script>
-        {% endif %}
     </div>
 </div>
 

@@ -1,42 +1,55 @@
 {% extends 'base.html' %}
-{% load static %}
-{% block meta %}
-<title>Edit Food</title>
-{% endblock meta %}
 
 {% block content %}
 {% include 'navbar.html' %}
 
 <div class="min-h-screen flex items-center justify-center w-screen py-12 px-4 sm:px-6 lg:px-8" style="background-image: url('/static/image/login_register_bg.jpg'); background-size: cover; background-position: center;">
-  <div class="max-w-lg w-2/3 bg-white bg-opacity-70 p-8 rounded-lg shadow-lg">
-    <h1 class="text-3xl font-bold mb-6 text-center text-red-500">Edit Food</h1>
+    <div class="max-w-2xl w-full bg-gray-200 bg-opacity-70 p-8 rounded-lg shadow-lg">
+        <h1 class="text-3xl font-bold mb-6 text-center text-red-500">Edit Food</h1>
 
-    <form method="POST" class="space-y-4">
-      {% csrf_token %}
-      {% for field in form %}
-        <div class="flex flex-col">
-          <label for="{{ field.id_for_label }}" class="mb-2 font-semibold text-gray-700">
-            {{ field.label }}
-          </label>
-          <div class="w-full">
-            {{ field }}
-          </div>
-          {% if field.help_text %}
-            <p class="mt-1 text-sm text-red-500">{{ field.help_text }}</p>
-          {% endif %}
-          {% for error in field.errors %}
-            <p class="mt-1 text-sm text-red-600">{{ error }}</p>
-          {% endfor %}
-        </div>
-      {% endfor %}
-      <div class="flex justify-end">
-        <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105 w-full">
-          Edit Food
-        </button>
-      </div>
-    </form>
-  </div>
+        <form method="POST" class="space-y-6">
+            {% csrf_token %}
+            
+            <div>
+                {% if form.name.errors %}
+                  <div class="text-red-500 text-sm">
+                      {{ form.name.errors }}
+                  </div>
+                {% endif %}
+                <label for="name" class="block text-sm font-medium text-red-500 mb-1">Name:</label>
+                <input type="text" name="name" id="name" value="{{ food.name }}" class="border border-gray-300 p-2 w-full rounded-lg focus:ring-red-500 focus:border-red-500">
+            </div>
+
+            <div>
+                <label for="price" class="block text-sm font-medium text-red-500 mb-1">Price:</label>
+                <input type="number" name="price" id="price" value="{{ food.price }}" class="border border-gray-300 p-2 w-full rounded-lg focus:ring-red-500 focus:border-red-500">
+            </div>
+
+            <div>
+              {% if form.description.errors %}
+                <div class="text-red-500 text-sm">
+                    {{ form.description.errors }}
+                </div>
+              {% endif %}
+              <label for="description" class="block text-sm font-medium text-red-500 mb-1">Description:</label>
+              <textarea name="description" id="description" class="border border-gray-300 p-2 w-full rounded-lg focus:ring-red-500 focus:border-red-500">{{ food.description }}</textarea>
+            </div>
+
+            <div>
+                <label for="quantity" class="block text-sm font-medium text-red-500 mb-1">Quantity:</label>
+                <input type="number" name="quantity" id="quantity" value="{{ food.quantity }}" class="border border-gray-300 p-2 w-full rounded-lg focus:ring-red-500 focus:border-red-500">
+            </div>
+
+            <div>
+                <label for="rating" class="block text-sm font-medium text-red-500 mb-1">Rating (0-5):</label>
+                <input type="number" name="rating" id="rating" value="{{ food.rating }}" class="border border-gray-300 p-2 w-full rounded-lg focus:ring-red-500 focus:border-red-500" step="0.1" min="0" max="5">
+            </div>
+
+            <div class="flex justify-center">
+                <input type="submit" value="Edit Food" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg cursor-pointer transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-105">
+            </div>
+        </form>
+    </div>
 </div>
 
-{% endblock %}
-
+{% endblock content %}

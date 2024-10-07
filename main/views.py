@@ -19,13 +19,13 @@ from django.utils.html import strip_tags
 # Add 'items'
 def show_main(request):
 
-    food_entries = FoodEntry.objects.filter(user=request.user)
+    # food_entries = FoodEntry.objects.filter(user=request.user)
 
     context = {
         'app': 'Food Pedia',
         'name': request.user.username,
         'class': 'PBP C',
-        'food_entries': food_entries,
+        # 'food_entries': food_entries,
         'last_login': request.COOKIES['last_login']
     }
     return render(request, "main.html", context)
@@ -34,12 +34,13 @@ def show_main(request):
 def create_food_entry(request):
     form = FoodEntryForm(request.POST or None)
 
-    if form.is_valid() and request.method == "POST":
-        food_entry = form.save(commit=False)
-        food_entry.user = request.user
-        food_entry.save()
-        return redirect('main:show_main')
-
+    if request.method == "POST":
+        if form.is_valid():
+            food_entry = form.save(commit=False)
+            food_entry.user = request.user
+            food_entry.save()
+            return redirect('main:show_main')
+    
     context = {'form': form}
     return render(request, "create_food_entry.html", context)
 
@@ -102,15 +103,77 @@ def logout_user(request):
     return response
 
 def edit_food(request, id):
-    food = FoodEntry.objects.get(pk = id)
-    form = FoodEntryForm(request.POST or None, instance=food)
+    # try:
+    #     food = FoodEntry.objects.get(pk=id) 
+    # except FoodEntry.DoesNotExist:
+    #     return HttpResponse("Food not found", status=404)  
 
-    if form.is_valid() and request.method == "POST":
-        form.save()
-        return HttpResponseRedirect(reverse('main:show_main'))
+    # if request.method == 'POST':
+    #     name = strip_tags(request.POST.get("name"))
+    #     description = strip_tags(request.POST.get("description"))
+    #     price = request.POST.get("price")
+    #     quantity = request.POST.get("quantity")
+    #     rating = request.POST.get("rating")
+    #     # user = request.user
 
-    context = {'form': form}
+    #     food.name=name
+    #     food.description=description
+    #     food.price=price
+    #     food.quantity=quantity
+    #     food.rating=rating
+    #     food.save()
+
+    #     return redirect('main:show_main')
+
+    # return render(request, 'edit_food.html', {'food': food})
+# -----
+    # food = FoodEntry.objects.get(pk=id)
+    # form = FoodEntryForm(instance=food)
+
+    # if request.method == "POST":
+    #     if form.is_valid():
+    #         name = strip_tags(request.POST.get("name"))
+    #         description = strip_tags(request.POST.get("description"))
+    #         price = request.POST.get("price")
+    #         quantity = request.POST.get("quantity")
+    #         rating = request.POST.get("rating")
+            
+    #         food.name=name
+    #         food.description=description
+    #         food.price=price
+    #         food.quantity=quantity
+    #         food.rating=rating
+    #         food.save()
+    #         return redirect('main:show_main')
+    
+    # context = {'food': food}
+    # return render(request, "edit_food.html", context)
+# ------
+    food = FoodEntry.objects.get(pk=id)
+    if request.method == "POST":
+        form = FoodEntryForm(request.POST, instance=food)
+        if form.is_valid():
+            form.save()
+            return redirect('main:show_main')
+    else:
+        form = FoodEntryForm(instance=food)
+
+    context = {'form': form, 'food': food}
     return render(request, "edit_food.html", context)
+
+
+    # food = FoodEntry.objects.get(pk = id)
+    # form = FoodEntryForm(request.POST or None, instance=food)
+
+    # if request.method == "POST":
+    #     if form.is_valid():
+    #         form.save()
+    #         return HttpResponseRedirect(reverse('main:show_main'))
+
+
+    # context = {'form': form}
+    # return render(request, "edit_food.html", context)
+
 
 def delete_food(request, id):
     food = FoodEntry.objects.get(pk = id)
@@ -119,38 +182,44 @@ def delete_food(request, id):
 
 @csrf_exempt
 @require_POST
-def add_food_entry_ajax(request):
-    form = FoodEntryForm(request.POST)
-
-    if form.is_valid():
-        # If the form is valid, save it
-        food_entry = form.save(commit=False)
-        food_entry.user = request.user  # Assign the user
-        food_entry.save()
-        return HttpResponse(b"CREATED", status=201)
-    
-    # If the form is invalid, return errors
-    errors = form.errors.as_json()
-    return HttpResponse(errors, status=400, content_type="application/json")
-
-
 # def add_food_entry_ajax(request):
-#     name = strip_tags(request.POST.get("name"))
-#     description = strip_tags(request.POST.get("description"))
-#     price = request.POST.get("price")
-#     quantity = request.POST.get("quantity")
-#     rating = request.POST.get("rating")
-#     user = request.user
+#     form = FoodEntryForm(request.POST)
 
-#     new_food = FoodEntry(
-#         name=name,
-#         description=description,
-#         price=price,
-#         quantity=quantity,
-#         rating=rating,
-#         user=user
+#     if form.is_valid():
+#         # If the form is valid, save it
+#         food_entry = form.save(commit=False)
+#         food_entry.user = request.user  # Assign the user
+#         food_entry.save()
+#         return HttpResponse(b"CREATED", status=201)
+    
+#     # If the form is invalid, return errors
+#     errors = form.errors.as_json()
+#     return HttpResponse(errors, status=400, content_type="application/json")
 
-#     )
-#     new_food.save()
 
-#     return HttpResponse(b"CREATED", status=201)
+def add_food_entry_ajax(request):
+    name = strip_tags(request.POST.get("name"))
+    description = strip_tags(request.POST.get("description"))
+    price = request.POST.get("price")
+    quantity = request.POST.get("quantity")
+    rating = request.POST.get("rating")
+    user = request.user
+
+    new_food = FoodEntry(
+        name=name,
+        description=description,
+        price=price,
+        quantity=quantity,
+        rating=rating,
+        user=user
+
+    )
+
+    form = FoodEntryForm(request.POST, instance=new_food)
+    if form.is_valid():
+        new_food.save()
+        return HttpResponse(b"CREATED", status=201)
+    else:
+        errors = form.errors.as_json()
+        return HttpResponse(errors, status=400, content_type="application/json")
+    

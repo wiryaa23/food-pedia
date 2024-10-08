@@ -200,9 +200,9 @@ def delete_food(request, id):
 def add_food_entry_ajax(request):
     name = strip_tags(request.POST.get("name"))
     description = strip_tags(request.POST.get("description"))
-    price = request.POST.get("price")
-    quantity = request.POST.get("quantity")
-    rating = request.POST.get("rating")
+    price = strip_tags(request.POST.get("price"))
+    quantity = strip_tags(request.POST.get("quantity"))
+    rating = strip_tags(request.POST.get("rating"))
     user = request.user
 
     new_food = FoodEntry(

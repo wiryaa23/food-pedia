@@ -22,6 +22,11 @@
                 </div>
                 
                 <div>
+                    {% if form.price.errors %}
+                        <div class="text-red-500 text-sm">
+                            {{ form.price.errors }}
+                        </div>
+                    {% endif %}
                     <input type="number" name="price" value="{{ form.price.value|default_if_none:'' }}" placeholder="Price" class="block w-full p-2 border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500" required>
                 </div>
                 
@@ -35,10 +40,20 @@
                 </div>
                 
                 <div>
+                    {% if form.quantity.errors %}
+                        <div class="text-red-500 text-sm">
+                            {{ form.quantity.errors }}
+                        </div>
+                    {% endif %}
                     <input type="number" name="quantity" value="{{ form.quantity.value|default_if_none:'' }}" placeholder="Quantity" class="block w-full p-2 border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500" required>
                 </div>
                 
                 <div>
+                    {% if form.rating.errors %}
+                        <div class="text-red-500 text-sm">
+                            {{ form.rating.errors }}
+                        </div>
+                    {% endif %}
                     <input type="number" name="rating" value="{{ form.rating.value|default_if_none:'' }}" placeholder="Rating (0-5)" class="block w-full p-2 border border-gray-300 rounded-md focus:ring-red-500 focus:border-red-500" step="0.1" min="0" max="5" required>
                 </div>
 

@@ -371,9 +371,40 @@ Dalam hal ini, *decorator* `@csrf_exempt` berfungsi untuk menonaktifkan perlindu
 Menonaktifkan perlindungan CSRF pada suatu view tentunya membuka celah dalam hal keamanan aplikasi web. Maka dari itu, penggunaan *decorator* `@csrf_exempt` sebaiknya dilakukan dengan bijak dan hanya ketika dibutuhkan saja. Penggunaannya pun sebaiknya diimbangi dengan mekanisme keamanan tambahan untuk meminimalisir adanya serangan CSRF terhadap aplikasi web.
 
 ## 4. Pada tutorial PBP minggu ini, pembersihan data *input* pengguna dilakukan di belakang (*backend*) juga. Mengapa hal tersebut tidak dilakukan di *frontend* saja?
+Pembersihan data *input* pengguna di bagian *frontend* merupakan langkah awal untuk memberi umpan balik secara cepat kepada pengguna. Hal ini biasanya digunakan untuk meminimalisir input yang tidak sesuai sebelum data tersebut dicek di database. Contohnya adalah ketika meminta input nomor telepon, *frontend* dapat langsung mengembalikan respon input tidak valid kepada pengguna jika field nomor telepon diisi dengan karakter yang bukan angka.
 
+Pada tutorial PBP minggu ini, pembersihan data *input* pengguna dilakukan di belakang (*backend*) juga karena beberapa alasan, yaitu sebagai berikut.
+- Memperkuat keamanan
+
+Input pada sisi *frontend* cenderung mudah dimanipulasi oleh pengguna misalnya dengan menonaktifkan JavaScript pada browsernya, memodifikasi kode HTML, atau menggunakan alat seperti *Postman* untuk mengirim data secara langsung ke server tanpa melalui aplikasi web. Karena itu, sisi *backend* juga harus melakukan pembersihan data *input* untuk melindungi aplikasi dari input yang berbahaya.
+
+- Logika validasi yang lebih kompleks
+
+Terkadang ada beberapa logika validasi yang cukupm rumit bila dilakukan pada sisi *frontend*. Biasanya logika validasi ini memerlukan akses ke database, contohnya untuk mengecek apakah username yang dimasukkan sudah digunakan orang lain atau belum. Selain itu, *backend* juga dapat memasukkan validasi tambahan tertentu berdasarkan aturan bisnis atau aturan kredensial lainnya.
+
+- Penguraan beban sisi *frontend*
+
+Jika validasi yang kompleks dilakukan pada sisi *frontend*, biasanya pembersihan dilakukan secara kurang mendalam. Selain itu, pembersihan pada *frontend* dilakukan dengan tujuan mewujudkan *user experience* yang lebih baik, seperti memberi tahu jika format input salah. Jika pembersihan terlalu kompleks, *user experience* bisa menjadi kurang baik karena kompleksitas yang cenderung tinggi.
+
+Pada akhirnya, tentu akan lebih baik untuk menggunakan kombinasi pembersihan input dari *frontend* dan *backend* agar dapat mengembangkan aplikasi web secara aman dan efisien. Pembersihan pada sisi *frontend* berfungsi sebagai langkah awal untuk memberi umpan balik secara cepat kepada pengguna untuk validasi sederhana, dan pembersihan pada sisi *backend* berfungsi untuk menjaga keamanan data dan validasi yang lebih jauh.
 
 ## 5. Jelaskan bagaimana cara kamu mengimplementasikan *checklist* di atas secara *step-by-step* (bukan hanya sekadar mengikuti tutorial)!
 Cara yang saya lakukan dalam tugas kali ini adalah sebagai berikut.
-- 
+- Menambahkan *error message* pada `login_user` di `views.py` dan *redirect* kembali ke halaman login. Ini berfungsi memberi tahu user bahwa *username* atau *password* yang dimasukkan salah dan meminta input kembali.
+- Membuat fungsi `add_food_entry_ajax` di `views.py` untuk menambahkan entri makanan dengan ajax. 
+- Menambahkan validasi form agar dapat menangkap jika ada input yang tidak sesuai, khususnya serangan XSS.
+- Menambahkan *routing* untuk fungsi `add_food_entry_ajax` pada `urls.py`.
+- Mengganti proses menampilkan data *food entry* dengan mendapatkan objek *food entry* dari *endpoint* `/json`.
+- Menambahkan *block conditional* pada `main.html` untuk mengatasi kondisi jika belum ada entri makanan.
+- Menambahkan *block* `<script>` dan membuat fungsi `getFoodEntries` untuk mendapatkan entri  makanan, serta fungsi `refreshFoodEntries` untuk me-*refresh* data secara asinkronus.
+- Mengimplementasikan modal untuk fungsi `add_food_entry_ajax` di `main.html`.
+- Menambahkan fungsi seperti `showModal()` dan `hideModal()` karena tidak ada *class* modal yang *built-in* dari *Tailwind CSS*.
+- Menghubungkan tombol *Add New Food* sebelumnya dengan url `create_food_entry.html` dan menambahkan tombol baru *Add New Food by AJAX* untuk penambahan data dengan AJAX.
+- Membuat fungsi untuk menambahkan data berdasarkan *input* secara AJAX, yaitu `addMoodEntry()` di block `<script>`.
+- Menambahkan *event listener* pada form untuk menjalankan fungsi `addMoodEntry()`.
+- Menambahkan `strip_tags` untuk membersihkan data untuk langkah preventif mengamankan web dari serangan XSS.
+- Membuat fungsi `clean` untuk semua atribut pada model untuk validasi input.
+- Menambahkan *DOMPurify* untuk melakukan pembersihan di sisi *frontend*.
+- Menambahkan kondisional tambahan pada form untuk fungsi `create_food_entry()`, `edit_food()`, dan `add_food_entry_ajax()` sehingga program dapat melakukan validasi lebih lanjut.
+- Melakukan add, commit, dan push semua perubahan ke GitHub dan PWS.
 </details>
